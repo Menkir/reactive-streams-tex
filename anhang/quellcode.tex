@@ -1,0 +1,24 @@
+\chapter*{Anhang}
+\label{chap:APPENDIX}
+\addcontentsline{toc}{chapter}{Anhang}
+%\setcounter{chapter}{0}
+\addtocounter{chapter}{1}
+\setcounter{section}{0}
+\section{Quellcode}
+\label{chap:APPENDIX_SOURCECODE}
+\subsection{Reactive Server Implementierung}
+\lstinputlisting[language=Java, breaklines=true, captionpos=t, caption={Reactve Server Implementation}, label={reactive:server:impl}]{./src/ReactiveServer.java}
+\subsection{Reactive Client Implementierung}
+\lstinputlisting[language=Java, breaklines=true, captionpos=t, caption={Reactive Client Implementation}, label={reactive:client:impl}]{./src/ReactiveClient.java}
+\subsection{Socket Server Implementierung}
+\label{chap:programming:sync:server}
+\lstinputlisting[language=Java, breaklines=true, captionpos=t, caption={Socket Server Implementation}, label={blocking:server:impl}]{./src/SyncServer.java}
+\subsection{Socket Client Implementierung}
+\label{chap:programming:sync:client}
+\lstinputlisting[language=Java, breaklines=true, captionpos=t, caption={Socket Client Implementation}, label={blocking:client:impl}]{./src/SyncClient.java}
+\subsection{Test der reaktiven Variante}
+\label{chap:programming:test:async}
+\lstinputlisting[language=Scala, breaklines=true, captionpos=t, caption={Scalatest der reaktiven Variante}]{./src/AsyncSimulation.scala}
+\subsection{Test der synchronen Variante}
+\label{chap:programming:test:sync}
+\lstinputlisting[language=Scala, breaklines=true, captionpos=t, caption={Scalatest der synchronen Variante}]{./src/SyncSimulation.scala}

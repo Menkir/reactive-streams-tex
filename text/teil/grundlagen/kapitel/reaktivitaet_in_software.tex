@@ -1,0 +1,14 @@
+\chapter{Reaktivität in Software}
+\label{chap:reaktivitaet_in_software}
+Grundsätzlich beschreibt Reaktivität einen Vorgang, bei dem etwas auf einen Reiz oder Impuls reagiert. Im Kontext der Softwareentwicklung bedeutet dies, dass eine Anwendung auf Reize in Events respektive Signale reagiert. 
+Um den Begriff Reaktivität zu differenzieren, wird zwischen Anwendungsebene und Systemebene unterschieden.\footnote{vgl. Malawski, Abs. 2 \cite{buch:why_reactive:kapitel1} \label{yr}}
+
+Die Reaktivität in der Systemebene meint die Steuerung und Verwaltung der \glslink{Ressourcen}{Ressourcen} in verteilten Systemen.\footnote{vgl. Bonér \& Klang, 2017, S. 15 \cite{technischer_bericht:lightbend:rpvsrs} \label{rpvsrs}} Ein Beispiel hierfür sind Microservices, die verteilt werden. Unklar bleibt dabei, was passiert, wenn ein Microservice ausfällt oder wenn die Anzahl der Nutzeranfragen stark ansteigt. Der Service muss auf solche Änderungen reagieren und schnelle \glslink{Antwortzeit}{Antwortzeiten} liefern. Die Reaktivität meint daher auch die Reaktion auf Last und Fehler. Im Jahr 2013 wurde ein Manifest veröffentlicht, das ein reaktives System anhand von vier Qualitäten beschreibt. In Kapitel \ref{chap:reaktivitaet_auf_der_systemebene} wird dieses Manifest näher erläutert.
+
+Die Reaktivität in der Anwendungsebene spiegelt die Reaktion einer Anwendung auf ein oder mehrere Events. Ein Beispiel hierfür ist Java Swing. So lässt sich beispielsweise für jedes JComponent ein Listener implementieren, das auf Mausbewegungen oder Klicks reagiert. Bei Reaktivität in der Anwendungsebene ist von reaktiver Programmierung die Rede. Diese Art der Programmierung befasst sich mit der asynchronen, nicht blockierenden Verarbeitung von Events mittels Datenströmen (Streams). Wie diese Programmierung praktisch umgesetzt ist, wird in Kapitel \ref{chap:reaktivitaet_auf_der_anwendungsebene} diskutiert.
+
+In beiden Ebenen ist die Reaktivität definiert, jedoch ist es notwendig, den Unterschied zwischen den Ebenen zu beachten, denn ein Softwarearchitekt versteht unter der Reaktivität etwas anderes, als ein Anwendungsentwickler. Allerdings sind die Grenzen zwischen diesen Ebenen fließend. So können Teile eines reaktiven Systems mit reaktiven Programmiertechniken implementiert werden.
+
+Aktuelle Frameworks, mit denen sich reaktive Systeme bauen lassen, werden im Kapitel \ref{section:frameworks} erläutert. Die Vorteile von reaktiven Systemen werden in Erfolgsgeschichten von bekannten Unternehmen in Kapitel \ref{chap:scenario} gezeigt. 
+
+Da der Fokus dieser Thesis darauf liegt, zu ermitteln, wann reaktive Programmierung sinnvoll ist und was für Möglichkeiten sie mit sich bringt, werden zunächst reaktive Programmiertechniken in Kapitel \ref{chap:reaktivitaet_auf_der_anwendungsebene} vorgestellt und anschließend die zugehörigen Bibliotheken in Kapitel \ref{chap:evaluierung} evaluiert. 

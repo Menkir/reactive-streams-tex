@@ -1,0 +1,168 @@
+%---------------
+%╔═╗╔═╗╔╦╗╦ ╦╔═╗
+%╚═╗║╣  ║ ║ ║╠═╝
+%╚═╝╚═╝ ╩ ╚═╝╩  
+%---------------
+
+% language setup
+\newcommand{\docLanguage}{ngerman}
+\RequirePackage{mmap}%
+% DOCUMENT SETUP
+\documentclass[oneside]{htwg-report} % remove oneside for printing version
+
+% encoding setup
+% T1 font encoding for languages that use a latin alphabet
+\usepackage[T1]{fontenc} 
+
+% enhanced input encoding handling - utf8 for äÄüÜöÖß...
+\usepackage[utf8]{inputenc}
+
+% glossary
+\usepackage[style=long,nonumberlist,toc]{glossaries}
+\loadglsentries{vorwort/glossentries}
+
+% floating prevention packages
+\usepackage{float}    % used with [H] positioning parameter
+
+\usepackage{filecontents}
+\usepackage{graphicx}
+
+\addbibresource{./bib/report.bib}
+
+% Caption
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{htwg-teal}{\parbox{\textwidth}{#1#2#3}}}
+\DeclareCaptionFormat{figure}{\colorbox{htwg-teal}{\parbox{\textwidth}{#1#2#3}}}
+\DeclareCaptionFormat{table}{\colorbox{htwg-teal}{\parbox{\textwidth}{#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+\captionsetup[figure]{format=listing,labelfont=white,textfont=white}
+\captionsetup[table]{format=listing,labelfont=white,textfont=white}
+
+\newcommand{\repeatcaption}[2]{%
+  \renewcommand{\thefigure}{\ref{#1}}%
+  \captionsetup{list=no}%
+  \caption{#2 (Wiederholung von Seite \pageref{#1})}%
+}
+
+% to large table
+\usepackage{booktabs}
+
+% enumeration
+\usepackage{enumitem}
+% tabular extension tabularx
+\usepackage{tabularx}
+
+% Listing configs
+\usepackage{listings}
+\input{cfgs/listings/listings_def_lang_latex.tex}
+\input{cfgs/listings/listings_def_lang_java.tex} 
+\input{cfgs/listings/listings_def_lang_bash-cmd.tex} 
+\input{cfgs/listings/listings_def_lang_scala.tex} 
+
+%-----------------------------------------
+% ╔╗ ╔═╗╔═╗╦╔╗╔  ╔╦╗╔═╗╔═╗╦ ╦╔╦╗╔═╗╔╗╔╔╦╗ 
+% ╠╩╗║╣ ║ ╦║║║║   ║║║ ║║  ║ ║║║║║╣ ║║║ ║  
+% ╚═╝╚═╝╚═╝╩╝╚╝  ═╩╝╚═╝╚═╝╚═╝╩ ╩╚═╝╝╚╝ ╩  
+%-----------------------------------------
+
+\begin{document}
+
+%% 'reporttype' add background elements to the cover / front page
+%% possible values are:
+%% bachelor	--> B S C
+%% master	--> M S C
+%% other		--> none
+\reporttype{bachelor}
+
+\reporttypetext{Bachelorarbeit}
+
+\title[Kriterien und Möglichkeiten für den Einsatz von Reaktiver Programmierung]{Kriterien und Möglichkeiten für den Einsatz von Reaktiver Programmierung}
+
+\author{Kirill Meng}
+\studentnumber{292154}
+\studentemail{kimeng@htwg-konstanz.de}
+
+\doclocation{Friedrichshafen}
+\docdate{28 Februar 2019}
+
+\makecover[]
+%\setlength{\parindent}{0pt}
+
+%% Use Roman numerals for the page numbers of the title pages and table of
+%% contents.
+\frontmatter
+%          
+%% Include an optional title page.
+\input{title}
+\input{vorwort/declaration}
+\input{vorwort/abstract}
+
+%
+% TABLE OF CONTENTS
+%
+\tableofcontents
+%
+% Abbildungsverzeichnis
+%
+\input{vorwort/listoffigures}
+%
+% Tabellenverzeichnis
+%
+\input{vorwort/listoftables}
+
+%
+% Listingverzeichnis
+%
+\input{vorwort/lstlistoflistings}
+
+%
+% Glossar
+%
+
+\input{vorwort/glossary}
+
+%% Use Arabic numerals for the page numbers of the chapters.
+\mainmatter
+
+%--------------------------
+% ╔═╗╦ ╦╔═╗╔═╗╔╦╗╔═╗╦═╗╔═╗ 
+% ║  ╠═╣╠═╣╠═╝ ║ ║╣ ╠╦╝╚═╗ 
+% ╚═╝╩ ╩╩ ╩╩   ╩ ╚═╝╩╚═╚═╝ 
+%--------------------------
+
+\pagenumbering{arabic} 
+\setcounter{page}{1} 
+%
+% CHAPTER Einleitung
+%
+\input{text/einleitung}
+%
+% Teil 1. Grundlagen
+%
+\input{text/teil/grundlagen/grundlagen}
+%
+% Teil 2. Reaktive Programmierung in der Praxis
+%
+\input{text/teil/praxis/praxis}
+%
+% Teil 3. Konzeption und Realisierung einer Anwendung
+%
+\input{text/teil/prototyp/prototyp}
+%
+% CHAPTER Fazit
+%
+\input{text/fazit}
+
+%% Use letters for the chapter numbers of the appendices.
+\appendix
+\input{./anhang/quellcode.tex}
+
+\printbibliography[heading=bibintoc]
+
+\end{document}
+%------------------------------------
+% ╔═╗╔╗╔╔╦╗  ╔╦╗╔═╗╔═╗╦ ╦╔╦╗╔═╗╔╗╔╔╦╗
+% ║╣ ║║║ ║║   ║║║ ║║  ║ ║║║║║╣ ║║║ ║ 
+% ╚═╝╝╚╝═╩╝  ═╩╝╚═╝╚═╝╚═╝╩ ╩╚═╝╝╚╝ ╩ 
+%------------------------------------

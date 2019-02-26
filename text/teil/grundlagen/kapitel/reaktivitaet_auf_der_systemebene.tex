@@ -1,0 +1,32 @@
+\chapter{Reaktivität auf der Systemebene}
+\label{chap:reaktivitaet_auf_der_systemebene}
+\section{Einführung}
+Es folgen die drei Hauptgründe dafür, weshalb Reaktivität in Softwaresystemen zunehmende Bedeutung erhält:
+\begin{enumerate}
+\item Big Data: Die stetig steigende Datenmenge befindet sich inzwischen im Petabyte-Bereich. \footnote{vgl. Urma et al., S. 417 \cite{buch:modern_java_in_action:kapitel17} \label{modernjavainaction:chap17}}
+\item Applikationen laufen heutzutage nicht nur auf Smartphones, sondern auch in Clustern mit der Leistung von tausenden von Multikernprozessoren. Dieser hohe Grad an Verteilung muss entsprechend verwaltet werden. \footref{modernjavainaction:chap17}
+\item Die Nutzer erwarten Antwortzeiten im Millisekunden Bereich und einen andauernden Betrieb ohne Aussetzer. \footref{modernjavainaction:chap17}
+\end{enumerate}
+
+Zieht man in Betracht, dass Software auch in Kleinstgeräten integriert ist (IoT), nimmt die zu verarbeitende Datenmenge weiter zu. \footref{modernjavainaction:chap17} Solche Hürden sind nicht mit traditionellen Software-Architekturen vereinbar. Nicht reaktive Systeme können solche Datenmengen nicht effizient verarbeiten, ohne einen hohen Grad an Komplexität in ein Projekt zu bringen. So müssen beispielsweise Fehler geeignet behandelt und Komponenten neu gestartet werden, was Aussetzer (Down Times) verursacht. In reaktiven Systemen dagegen werden Anfragen an eine defekte Komponente - ohne dass es dem Nutzer auffällt - zu einer funktionierenden Komponente delegiert, während die defekte Komponente im Hintergrund wiederhergestellt wird.
+ 
+Im Jahr 2013 stellte eine Gruppe von Programmierern das reaktive Manifest vor, das notwendige Qualitäten für ein System beschreibt in dem kurze Antwortzeiten, unter hohen Lasten und Fehlern gewährleistet werden.
+\section{Das reaktive Manifest}
+\label{sec:das_reaktive_manfiest}
+Das reaktive Manifest definiert vier Qualitäten, die ein reaktives System ausmachen.
+
+Das oberste Ziel eines reaktiven Systems ist die \textbf{Antwortbereitschaft}. Es gilt, sie im Zeichen der Qualität so hoch wie möglich zu halten, denn dies schafft ein besseres Nutzererlebnis. Eine hohe Antwortbereitschaft fördert weitere Interaktionen des Nutzers mit der Software, da nicht unnötig gewartet werden muss. 
+\footnote{vgl. Bonér et al., Das reaktive Manifest, 2014 \cite{web:site:das_reaktive_manifest} \label{reactive_manifesto}}
+Um eine hohe Antwortbereitschaft zu erreichen, benötigt es eine nachrichtenorientierte, elastische und widerstandsfähige Architektur.
+
+Die \textbf{Elastizität} ist die Einhaltung der Antwortbereitschaft unter sich wechselnden Lastbedingungen. So muss beispielsweise das System unter einer hohen Anzahl an Requests dieselbe Antwortzeit einhalten wie unter einer geringen Anzahl. Dies wird durch die dynamische \gls{Replikation} von Diensten ermöglicht. Das heißt, dass das reaktive System in der Lage sein muss, die aufkommende Last zur Laufzeit zu erkennen, um die Dienste zu \glslink{Replikation}{replizieren}.
+\footref{reactive_manifesto}
+Ein gutes Beispiel dafür, die Elastizität zu erreichen, ist die Containersoftware Docker mit der Verwaltungssoftware Kubernete zur Orchestrierung. Hierbei können die Dienste in separaten virtuellen Softwareumgebungen repliziert werden.
+
+Kein System kann fehlerfrei gebaut werden. Die \textbf{Widerstandsfähigkeit} beschreibt vor diesem Kontext, wie auf Fehler reagiert wird. Um auf Software- und Hardwareausfälle zu reagieren, müssen die Dienste replizierbar (Elastizität), vollständig isoliert und \glslink{Delegation}{delegierend} sein. Die Isolation von (replizierten) Diensten hat den Vorteil, dass die restlichen Softwarekomponenten im Fehlerfall unberührt bleiben und weiter ausgeführt werden können. Des Weiteren müssen aufgefallene Dienste Ihre Verantwortung an überliegende Dienste delegieren, die im Anschluss den vorherigen Zustand wiederherstellen können. \footref{reactive_manifesto}
+Die Delegation lässt sich beispielsweise mit Kubernete realisieren.
+
+Die Kommunikation zwischen Diensten sowie die Delegation und Isolation müssen über eine \textbf{nachrichtenorientierte} Kommunikation erfolgen. Dies erlaubt erst die Isolation der Dienste und damit einhergehend die Elastizität und Widerstandsfähigkeit. Nachrichten ermöglichen eine Verteilung der Dienste und ebenso eine sprachunabhängige Formulierung des Programms. \footref{reactive_manifesto}
+So können Programmiersprachen beispielsweise entsprechend ihrer Eigenschaften genutzt werden. Berechnungen u. s. w können in Sprachen wie C, C++ oder Rust geschrieben werden, während die grafische Oberfläche oder Datenbankenschnittstellen in Java und Scala geschrieben werden können. Beispiele für nachrichtenorientierte Kommunikation sind SOAP und das Aktorenmodell.
+
+Zusammengefasst bildet die nachrichtenorientierte Kommunikation die Basis eines reaktiven Systems, denn sie gewährt eine elastische und widerstandsfähige Architektur und somit die Antwortbereitschaft. Die Qualitäten bringen Vorteile wie Isolation, Replikation und Delegation und ermöglichen es den Entwicklern, sich mehr auf die eigentliche Anwendung zu konzentrieren. Die Anwendung wiederum kann reaktiv implementiert werden, jedoch muss Reaktivität hier anders verstanden werden: als Reaktivität auf Anwendungsebene.

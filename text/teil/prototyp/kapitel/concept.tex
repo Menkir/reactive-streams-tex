@@ -1,0 +1,22 @@
+\chapter{Konzeption einer reaktiven Anwendung}
+\label{chap:concept}
+Die Anwendung basiert auf der Idee der Kommunikation zwischen autonomen Fahrzeugen und Servern. Ein Fahrzeug misst die Signalstärke eines Signals zum nächsten Mobilfunkmast und sendet einem Server die Signalstärke sowie die aktuelle Position in Form von Koordinaten. Der Server verarbeitet die Daten und sendet dem Fahrzeug eine Antwort. Mit den gewonnenen Datan (Signalstärke und Koordinate) lassen sich nun Heatmaps erzeugen, also bspw. eine  Stadtkarte die farblich markierte Bereiche anzeigt, in denen autonome Fahrzeuge, ohne Verbindungsabbruch, fahren können. 
+
+Die Anwendung soll die Kommunikation zwischen Server und Fahrzeug reaktiv umsetzen. Anschließend sollen ein Vergleich zu einer blockierenden Variante gezogen werden.
+
+\section{Anforderungen}
+Die prototypische Anwendung muss folgende Anforderungen erfüllen:
+\begin{description}
+\label{anforderungen}
+\item [Client: ] Ein Auto fährt eine vordefinierte Route ab. Währenddessen misst es die Signalstärke zum nächsten Mast und sendet diese zusammen mit der Position an den Server. Zwischen jeder versendeten Messung wartet das Auto 200 ms.
+\item [Server: ] Empfängt eine Positionskoordinate und die zugehörige Signalstärke, verarbeitet diese und sendet eine Antwort an das Auto zurück
+\end{description}
+
+\section{Die Wahl der Technologien}
+Die Applikation wird in zwei Varianten implementiert. Zum einen eine reaktive und zum anderen eine synchrone, blockierende Variante.
+
+Im Rahmen dieser Thesis wird TCP anstelle von HTTP als Übertragungsprotokoll verwendet. Der Grund dafür ist, dass eine triviale Datenstruktur (Positionskoordinate und Signalstärke) verwendet wird. Der Mehraufwand, der durch die Nutzung eines Http-Frameworks entsteht ist in diesem Fall nicht gerechtfertigt.
+
+Für die reaktive Anwendung wird die Reactor Bibliothek verwendet, da sie unter den bekanntesten Bibliotheken am besten abschneidet (siehe Kapitel \ref{sec:bewertung}). Als Kommunikationstechnologie wird das RSocket\footnote{\href{www.rsocket.io}{www.rsocket.io}} Protokoll verwendet. Das RSocket Protokoll nutzt die Reactive Streams Semantik um Daten über verschiedenste Protokolle (TCP, UDP uvm.) zu übertragen. Die Schnittstellen sind mit denen von Reactor kompatibel.
+
+Für die blockierende Variante wird die Socket API aus dem java.net Package verwendet, da die reaktive Version ebenfalls eine Socket Implementierung ist. 
